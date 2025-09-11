@@ -30,7 +30,7 @@ You are an AI developer tasked with building a comprehensive agent ecosystem for
 - **azure-ai-projects** package version 1.0.0b12 or greater (`azure-ai-projects>=1.0.0b12`)
 - **Azure AI User role** assigned to your account for the Azure AI Foundry project
   - See [Azure AI Foundry RBAC documentation](https://learn.microsoft.com/en-us/azure/ai-foundry/concepts/rbac-azure-ai-foundry?pivots=fdp-project) for more details on role assignments
-- `.env` file configured with PROJECT_CONNECTION_STRING and MODEL_DEPLOYMENT_NAME
+- `.env` file configured with AI_FOUNDRY_PROJECT_ENDPOINT and MODEL_DEPLOYMENT_NAME
 - Azure AI Foundry project already provisioned
 
 ## Tasks
@@ -169,7 +169,7 @@ pip install -r requirements.txt
 
 2. Edit `.env` file with your Azure credentials:
    ```bash
-   PROJECT_CONNECTION_STRING=<your-project-connection-string-from-azure-ml-workspace>
+   AI_FOUNDRY_PROJECT_ENDPOINT=<your-project-connection-string-from-azure-ml-workspace>
    MODEL_DEPLOYMENT_NAME=<your-model-deployment-name>
    EMBEDDING_MODEL_DEPLOYMENT_NAME=<your-embedding-model-deployment-name>
    TENANT_ID=<your-tenant-id-from-azure-portal>
