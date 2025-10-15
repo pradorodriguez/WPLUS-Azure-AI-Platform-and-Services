@@ -104,7 +104,7 @@ sed -i '/^GRAPHRAG_API_KEY=/d' ragtest/.env \
 export AZURE_OPENAI_ENDPOINT=<instance>.openai.azure.com
 ```
 
-2. Then run the following
+2. Then run the following in Cloudshell
 
 ```bash
 
