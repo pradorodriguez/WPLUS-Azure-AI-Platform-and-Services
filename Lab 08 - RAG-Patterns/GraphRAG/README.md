@@ -161,10 +161,10 @@ graphrag query \
 #### DRIFT Query (not working as of GraphRAG v2.7.0)
 
 ```bash
-graphrag query \
-  --root ./ragtest \
-  --method drift \
-  --query "Who is Scrooge and what are his main relationships?"
+# graphrag query \
+#  --root ./ragtest \
+#  --method drift \
+#  --query "Who is Scrooge and what are his main relationships?"
 
 ```
 
