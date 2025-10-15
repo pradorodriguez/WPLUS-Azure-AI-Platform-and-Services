@@ -8,7 +8,7 @@
 ### GraphRAG
 
 Please reference the [GraphRAG Getting Started instructions here](https://microsoft.github.io/graphrag/get_started/). The VBD closely follows these instructions and the library changes frequently. 
-These instructions will always be in sync with the library.
+These instructions will fast-follow library releases, but for the latest guides you should refer to Getting Started instructions.
 
 ### GraphRAG Accelerator
 
