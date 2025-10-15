@@ -108,13 +108,15 @@ export AZURE_OPENAI_ENDPOINT=<instance>.openai.azure.com
 
 ```bash
 
-sed -i  \
-  -e 's/model_provider: openai/model_provider: azure_openai/g' \
+# Use sed to update settings.yaml with correct values for Azure.
+
+sed -i \
+  -e 's/model_provider: openai/model_provider: azure/g' \
   -e 's/model: gpt-4-turbo-preview/model: gpt-4o-mini/' \
-  -e 's/# api_base: https:\/\/<instance>\.openai\.azure\.com/api_base: https:\/\/$AZURE_OPENAI_ENDPOINT\//g' \
+  -e "s|# api_base: https://<instance>\.openai\.azure\.com|api_base: https://${AZURE_OPENAI_ENDPOINT}/|g" \
   -e 's/# api_version: 2024-05-01-preview/api_version: 2024-05-01-preview/g' \
   -e 's/graphml: false/graphml: true/' \
-  settings.yaml
+  ragtest/settings.yaml
 
 ```
 
@@ -171,4 +173,21 @@ graphrag prompt-tune \
   --config ./ragtest/settings.yaml \
   --output ./ragtest/prompts \
   --domain "Literary Analyst"
+```
+
+#### (Optionally) Reindex and rerun your queries to see how they've changed
+
+```bash
+# Move previous index to
+mv ragtest/output ragtest/output-default
+
+# Re-index
+graphrag index --root ./ragtest
+
+# Run a Global query
+graphrag query \
+  --root ./ragtest \
+  --method global \
+  --query "What are the top themes in this story?"
+
 ```
