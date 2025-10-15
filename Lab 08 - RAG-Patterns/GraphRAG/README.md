@@ -153,7 +153,7 @@ graphrag query \
 ```
 
 
-#### DRIFT Query
+#### DRIFT Query (not working as of GraphRAG v2.7.0)
 
 ```bash
 graphrag query \
