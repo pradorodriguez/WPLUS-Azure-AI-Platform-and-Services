@@ -65,7 +65,7 @@ graphrag init --root ragtest
 ```bash
 
 # List files
-find -f ./ragtest
+find ./ragtest
 ```
 
 Expected files:
