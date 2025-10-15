@@ -178,6 +178,14 @@ graphrag prompt-tune \
   --domain "Literary Analyst"
 ```
 
+```bash
+# Inspect updated prompts
+
+more ragtest/prompts/extract_graph.txt
+
+more ragtest/prompts/summarize_descriptions.txt 
+```
+
 #### (Optionally) Reindex and rerun your queries to see how they've changed
 
 ```bash
