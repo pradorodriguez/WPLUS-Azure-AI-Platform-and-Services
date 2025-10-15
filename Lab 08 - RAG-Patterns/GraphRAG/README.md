@@ -128,6 +128,9 @@ sed -i \
 # Run indexing pipeline
 graphrag index --root ./ragtest
 
+```
+
+```bash
 # Review output
 ls ./ragtest/output
 
