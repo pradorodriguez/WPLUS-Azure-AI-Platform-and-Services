@@ -172,33 +172,33 @@ graphrag query \
 
 ```bash
 graphrag prompt-tune \
-  --root ./ragtest \
-  --config ./ragtest/settings.yaml \
-  --output ./ragtest/prompts \
-  --domain "Literary Analyst"
+ --root ./ragtest \
+ --config ./ragtest/settings.yaml \
+ --output ./ragtest/prompts-tuned \
+ --domain "Literary Analyst"
 ```
 
 ```bash
 # Inspect updated prompts
 
-more ragtest/prompts/extract_graph.txt
+more ragtest/prompts-tuned/extract_graph.txt
 
-more ragtest/prompts/summarize_descriptions.txt 
+more ragtest/prompts-tuned/summarize_descriptions.txt 
 ```
 
-#### (Optionally) Reindex and rerun your queries to see how they've changed
+#### (Optionally) Reindex and rerun your queries to see how they've changed (not working as of GraphRAG v2.7.0)
 
 ```bash
 # Move previous index to backup directory
-mv ragtest/output ragtest/output-default
+# mv ragtest/output ragtest/output-default
 
 # Re-index
-graphrag index --root ./ragtest --no-cache
+# graphrag index --root ./ragtest --no-cache
 
 # Run a Global query
-graphrag query \
-  --root ./ragtest \
-  --method global \
-  --query "What are the top themes in this story?"
+# graphrag query \
+#  --root ./ragtest \
+#  --method global \
+#  --query "What are the top themes in this story?"
 
 ```
