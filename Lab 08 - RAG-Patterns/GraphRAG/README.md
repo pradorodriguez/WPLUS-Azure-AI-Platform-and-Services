@@ -3,12 +3,12 @@
 ## Introduction 
 
 >**The following tasks are intended to be executed inside Cloud Shell via the Azure portal at [https://portal.azure.com](https://portal.azure.com).
->Use the credentials provided to you in the Resources tab.**
+>Use the credentials provided to you in the Resources tab. You may have to instantiate a Cloud Shell (bash) instance if using for the first time.**
 
 ### GraphRAG
 
 Please reference the [GraphRAG Getting Started instructions here](https://microsoft.github.io/graphrag/get_started/). The VBD closely follows these instructions and the library changes frequently. 
-These instructions will always be in sync with the library.
+These instructions will fast-follow library releases, but for the latest guides you should refer to Getting Started instructions.
 
 ### GraphRAG Accelerator
 
@@ -55,14 +55,15 @@ source venv/bin/activate
 # Install GraphRAG
 pip install graphrag
 
+```
+
+## Initialize and Explore GraphRAG Workspace
+
+```bash
+
 # Initialize workspace
 mkdir -p ragtest/input
 graphrag init --root ragtest
-```
-
-## Explore Initialized Workspace
-
-```bash
 
 # List files
 find ./ragtest
@@ -82,40 +83,42 @@ curl -L https://aka.ms/dickens/xmas -o ./ragtest/input/book.txt
 
 # Verify download
 wc ./ragtest/input/book.txt
+
 ```
 
-### Configure .env
+### Configure .env using your preferred Cloud Shell text editor
 
 ```bash
-# Edit .env file
-vi ragtest/.env
+## Copy the following command, change <your_api_key> to be your key from AI Foundry, and run it in its entirety.
 
-# Add your Azure OpenAI API key
-GRAPHRAG_API_KEY=<your_api_key>
+sed -i '/^GRAPHRAG_API_KEY=/d' ragtest/.env \
+  && echo "GRAPHRAG_API_KEY=<your_api_key>" >> ragtest/.env
 ```
 
 ### Update settings.yaml
 
-```yaml
+1. Copy, update (with Azure OpenAI endpoint instance), and execute the following command in Cloud Shell.
 
-llm:
-  type: azure_openai_chat
-  model: gpt-4o-mini
-  api_base: https://<instance>.openai.azure.com
-  api_version: 2024-02-15-preview
-  deployment_name: gpt-4o-mini
+```bash
+export AZURE_OPENAI_ENDPOINT=<instance>.openai.azure.com
+```
 
-embeddings:
-  type: azure_openai_chat
-  model: text-embedding-ada-002
-  api_base: https://<instance>.openai.azure.com
-  api_version: 2024-02-15-preview
-  deployment_name: text-embedding-ada-002
+2. Then run the following in Cloudshell
 
-snapshots:
-  graphml: true
+```bash
+
+# Use sed to update settings.yaml with correct values for Azure.
+
+sed -i \
+  -e 's/model_provider: openai/model_provider: azure/g' \
+  -e 's/model: gpt-4-turbo-preview/model: gpt-4o-mini/' \
+  -e "s|# api_base: https://<instance>\.openai\.azure\.com|api_base: https://${AZURE_OPENAI_ENDPOINT}/|g" \
+  -e 's/# api_version: 2024-05-01-preview/api_version: 2024-05-01-preview/g' \
+  -e 's/graphml: false/graphml: true/' \
+  ragtest/settings.yaml
 
 ```
+
 
 ### Run first index
 
@@ -124,6 +127,9 @@ snapshots:
 # Run indexing pipeline
 graphrag index --root ./ragtest
 
+```
+
+```bash
 # Review output
 ls ./ragtest/output
 
@@ -151,13 +157,13 @@ graphrag query \
 ```
 
 
-#### DRIFT Query
+#### DRIFT Query (not working as of GraphRAG v2.7.0)
 
 ```bash
-graphrag query \
-  --root ./ragtest \
-  --method drift \
-  --query "Who is Scrooge and what are his main relationships?"
+# graphrag query \
+#  --root ./ragtest \
+#  --method drift \
+#  --query "Who is Scrooge and what are his main relationships?"
 
 ```
 
@@ -165,8 +171,33 @@ graphrag query \
 
 ```bash
 graphrag prompt-tune \
-  --root ./ragtest \
-  --config ./ragtest/settings.yaml \
-  --output ./ragtest/prompts \
-  --domain "Literary Analyst"
+ --root ./ragtest \
+ --config ./ragtest/settings.yaml \
+ --output ./ragtest/prompts-tuned \
+ --domain "Literary Analyst"
+```
+
+```bash
+# Inspect updated prompts
+
+more ragtest/prompts-tuned/extract_graph.txt
+
+more ragtest/prompts-tuned/summarize_descriptions.txt 
+```
+
+#### (Optionally) Reindex and rerun your queries to see how they've changed (not working as of GraphRAG v2.7.0)
+
+```bash
+# Move previous index to backup directory
+# mv ragtest/output ragtest/output-default
+
+# Re-index
+# graphrag index --root ./ragtest --no-cache
+
+# Run a Global query
+# graphrag query \
+#  --root ./ragtest \
+#  --method global \
+#  --query "What are the top themes in this story?"
+
 ```
