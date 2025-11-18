@@ -42,7 +42,7 @@ Setup is already done with pre-requisite AI Foundry Creation Lab. Follow the ste
    - Click Your AI Foundry
    - Create a new hub in a region like *France Central*.
    ![Go to resource](rai_md_img/AIfoundry.png)
-   - Click on Advanced and remember to use the existing resource group pre-created for this lab VM
+   - Click on Advanced and remember to use the existing resource group pre-created for this lab VM. Remember to use the following names - +++**hubproject-@lab.LabInstance.Id**+++ (eg hubproject-53439517) and +++**hub-@lab.LabInstance.Id**+++ (eg hub-53439517) for both the **Hub** and **Hub Project**.Ensure to use this name, you will not be able to use a different name to create the resource.
    ![Go to resource](rai_md_img/AdvancedOptions.png)
    ![Go to resource](rai_md_img/foundryhubproject.png)
     - Click **Create** Ensure the hub is created successfully.
