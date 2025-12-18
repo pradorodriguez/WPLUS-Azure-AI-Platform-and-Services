@@ -129,6 +129,11 @@ limit 20;
 
 At the top of the script we will need to set our Azure OpenAI endpoint and API key.  
 
+For this, use the OpenAI Deployment that was deployed as part of this lab.
+
+![Open Query](images/openairesroucedeployment.png)
+![Open Query](images/endpointandkey.png)
+
 ![Open Query](images/11_SetAzureAIResourcesPGAdmin.png)
 ---
 

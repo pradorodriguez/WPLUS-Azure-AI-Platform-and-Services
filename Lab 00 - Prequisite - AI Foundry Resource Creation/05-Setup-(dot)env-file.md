@@ -37,7 +37,8 @@ Complete the prerequisites Lab exercises
 
 - Go to [https://ai.azure.com](https://ai.azure.com/) and sign in with your Azure credentials.
 - Click **Azure AI Foundry** at the top left
-- Click on the project name to go to project overview (firstProject)
+- Click on the project name to go to project overview (eg firstProject). Ignore the name in the screenshot as you have created project with name **firstProject** in pre-requisite lab exercise 1
+
 
 ![Go to resource](images/gotoprojectoverview.png)
 
